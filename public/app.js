@@ -15,7 +15,7 @@ function renderSummary(members) {
 
   summaryBar.innerHTML = `
     <div class="summary-card">
-      <div class="label">Active Now</div>
+      <div class="label">Active Today</div>
       <div class="value active-count">${activeCount} / ${members.length}</div>
     </div>
     <div class="summary-card">
@@ -47,12 +47,15 @@ function renderTable(members) {
       <tr>
         <td class="col-status" style="text-align:center">
           <span class="status-indicator ${m.active ? "active" : ""}"
-                title="${m.active ? "Currently using Claude Code" : "Inactive"}"></span>
+                title="${m.active ? "Active today" : "Inactive today"}"></span>
         </td>
         <td>
           <div class="member-name">
             <span class="avatar">${m.avatar}</span>
-            <span>${m.name}</span>
+            <div class="member-info">
+              <span class="name">${m.name}</span>
+              ${m.email ? `<span class="email">${m.email}</span>` : ""}
+            </div>
           </div>
         </td>
         <td class="col-lines ${todayChanged ? "flash" : ""}">${formatNumber(m.linesToday)}</td>

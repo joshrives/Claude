@@ -157,13 +157,28 @@ h1 {
 
 /* Name column */
 .col-name {
-  width: 220px;
+  width: 260px;
 }
 
 .member-name {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.member-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-info .name {
+  font-weight: 500;
+}
+
+.member-info .email {
+  font-size: 0.75rem;
+  color: #8b949e;
+  margin-top: 1px;
 }
 
 .avatar {

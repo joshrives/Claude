@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { getSnapshot, simulateLiveUpdates } = require("./data");
+const { getSnapshot, startPolling } = require("./data");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,8 +17,11 @@ app.get("/api/events", (req, res) => {
     Connection: "keep-alive",
   });
 
-  // Send initial snapshot
-  res.write(`data: ${JSON.stringify(getSnapshot())}\n\n`);
+  // Send current snapshot immediately
+  const snapshot = getSnapshot();
+  if (snapshot.length > 0) {
+    res.write(`data: ${JSON.stringify(snapshot)}\n\n`);
+  }
 
   clients.add(res);
   req.on("close", () => clients.delete(res));
@@ -29,13 +32,16 @@ app.get("/api/team", (_req, res) => {
   res.json(getSnapshot());
 });
 
-// Broadcast updates to all SSE clients
-simulateLiveUpdates((snapshot) => {
+// Broadcast to all SSE clients whenever data refreshes
+function broadcast(snapshot) {
   const payload = `data: ${JSON.stringify(snapshot)}\n\n`;
   for (const client of clients) {
     client.write(payload);
   }
-});
+}
+
+// Start polling the Anthropic Admin API and broadcast on each refresh
+startPolling(broadcast);
 
 app.listen(PORT, () => {
   console.log(`Dashboard running at http://localhost:${PORT}`);
