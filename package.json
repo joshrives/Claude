@@ -1,0 +1,13 @@
+{
+  "name": "team-code-dashboard",
+  "version": "1.0.0",
+  "description": "Live dashboard showing team Claude Code usage metrics",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

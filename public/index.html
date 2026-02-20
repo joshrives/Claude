@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Claude Code Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <header>
+      <h1>Team Claude Code Dashboard</h1>
+      <div class="connection-status" id="connection-status">
+        <span class="dot"></span>
+        <span class="label">Connecting...</span>
+      </div>
+    </header>
+
+    <div class="summary-bar" id="summary-bar"></div>
+
+    <table class="team-table">
+      <thead>
+        <tr>
+          <th class="col-status">Status</th>
+          <th class="col-name">Name</th>
+          <th class="col-lines">Lines Today</th>
+          <th class="col-lines">Lines This Week</th>
+          <th class="col-lines">All Time</th>
+        </tr>
+      </thead>
+      <tbody id="team-body"></tbody>
+    </table>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
